@@ -27,3 +27,30 @@ def extract_mfcc(signals: List[np.ndarray], config: DictConfig) -> np.ndarray:
         features.append(mfcc)
 
     return np.array(features, dtype=np.float32)
+
+
+def extract_stft(signals: List[np.ndarray], config: DictConfig) -> Dict[str, np.ndarray]:
+    """
+    Extract STFT spectrograms from audio waveforms.
+
+    Args:
+        signals: List of audio waveforms.
+        config: Hydra config object (sr, win_length, hop_length).
+
+    Returns:
+        Dictionary with keys 'magnitude' and 'db', each a 3D numpy array (num_samples, freq_bins, time_frames).
+    """
+    sr = get_audio_param(config, "sr", 16000)
+    win_length = get_audio_param(config, "win_length", 1024)
+    hop_length = get_audio_param(config, "hop_length", 256)
+
+    mag_specs, db_specs = [], []
+    for sig in tqdm(signals, desc="STFT"):
+        stft_mag = np.abs(librosa.stft(sig, n_fft=win_length, hop_length=hop_length))
+        stft_db = librosa.amplitude_to_db(stft_mag, ref=np.max)
+        mag_specs.append(stft_mag)
+        db_specs.append(stft_db)
+    return {
+        "magnitude": np.array(mag_specs, dtype=np.float32),
+        "db": np.array(db_specs, dtype=np.float32)
+    }
