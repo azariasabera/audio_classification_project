@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environments
+.env
+.venv/
+venv/
+.envrc
+
+# Jupyter
+.ipynb_checkpoints
+
+*.log
+
+# Results from running
+result/
+
+# Hydra output
+outputs/
+
+# VS Code
+.vscode/*
