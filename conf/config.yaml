@@ -1,0 +1,25 @@
+# conf/config.yaml
+
+test_proportion: 0.2
+
+# Input directory for datasets
+input_dir: ${hydra:runtime.cwd}/dataset
+
+# Output directory for results, models ...
+output:
+  dir: ${hydra:runtime.cwd}/result
+  model_dir: ${output.dir}/model
+  model_extension: .joblib  # to save models e.g. .pkl .joblib
+  
+audio:
+  extensions: [".wav"]
+  duration: 5.0
+  sr: 16000
+  n_mfcc: 20
+  n_mels: 128
+  win_length: 1024
+  hop_length: 256
+  n_bins: 84  # for CQT
+
+save_model: true
+save_metrics: true
