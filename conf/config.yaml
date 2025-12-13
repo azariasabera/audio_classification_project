@@ -1,5 +1,9 @@
 # conf/config.yaml
 
+defaults:
+  - models: models
+  - _self_
+
 test_proportion: 0.2
 
 # Input directory for datasets
