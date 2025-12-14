@@ -52,7 +52,7 @@ Each subfolder name is treated as a **class label**.
 │ └── run_pipeline.py # End-to-end pipeline
 ├── conf/
 │ ├── config.yaml # Main Hydra configuration
-│ └── models.yaml # Model definitions
+│ └── models/models.yaml # Model definitions
 ├── main.py # Entry point
 └── environment.yml
 ```
